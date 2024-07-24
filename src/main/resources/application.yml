@@ -1,0 +1,7 @@
+spring:
+    application:
+        name: dscommerce
+    jpa:
+        open-in-view: false
+    profiles:
+        active: test
