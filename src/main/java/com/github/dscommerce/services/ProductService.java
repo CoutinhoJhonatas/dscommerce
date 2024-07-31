@@ -9,9 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
-
 @Service
 public class ProductService {
 
@@ -33,6 +30,12 @@ public class ProductService {
     public Page<ProductDTO> findAll(Pageable pageable) {
         Page<Product> products = productRepository.findAll(pageable);
         return products.map(x -> modelMapper.map(x, ProductDTO.class));
+    }
+
+    @Transactional
+    public ProductDTO insert(ProductDTO dto) {
+        Product product = productRepository.save(modelMapper.map(dto, Product.class));
+        return modelMapper.map(product, ProductDTO.class);
     }
 
 }
