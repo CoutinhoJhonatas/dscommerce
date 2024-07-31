@@ -38,4 +38,16 @@ public class ProductService {
         return modelMapper.map(product, ProductDTO.class);
     }
 
+    @Transactional
+    public ProductDTO update(Long id, ProductDTO dto) {
+        Product product = productRepository.getReferenceById(id);
+        product.setName(dto.getName());
+        product.setDescription(dto.getDescription());
+        product.setPrice(dto.getPrice());
+        product.setImgUrl(dto.getImgUrl());
+
+        product = productRepository.save(product);
+
+        return modelMapper.map(product, ProductDTO.class);
+    }
 }
